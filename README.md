@@ -1,7 +1,6 @@
 
-<details><summary>**1. Original Scenario**</summary>
-<p>
-        
+**1. Original Scenario**
+       
 As all our team members are international students living outside the campus and do not own any car. Therefore, the school bus has been our main transportation tool, the bus line which is called “South City Line”. The original route of the “South City Line” is from the campus to Mutiara Residence, Univ360 Residence, South City Plaza, East Lake Residence, Sky Villa Residence, KTM Serdang, and turn back to the campus. It is believed that all the bus takers have experienced the traffic jam during the route around South City Plaza. Generally, there are certain number of international students are living near to the KTM Serdang, The Mines Resort, the traffic jam of the route from the campus to KTM Serdang is not heavy, and we can find it when we take the Grab ride. Moreover, there is a Free Bus line of Rapid KL called “SJ04”, which is covering the route from KTM Serdang to our campus, and it is our second plan to travel from home to campus, the passengers can tell the driver what their destinations are, and the driver can adjust the route by themselves. The drivers would love to avoid the route around South City Plaza to avoid the terrible traffic jam. The action the drivers took really inspired us, and we decide to do some improvements.
 
 ![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/1.png)
@@ -10,8 +9,6 @@ As all our team members are international students living outside the campus and
 
 As Figure 1 shown above, we were thinking about developing an application base on the timetable; Assuming that the bus is going to departure at 7:15am for the first roll, the reservation function will be activated 1 hour before the departure of the bus. The application will store the information of the “calling” stations and only travel around the “called” stations. It is not guaranteed that the traffic jam will be avoided every roll, but it is optimistic to avoid it some of the times.
 
-        </p>
-        </details>
         
 **2. Optimal Solution**
 
