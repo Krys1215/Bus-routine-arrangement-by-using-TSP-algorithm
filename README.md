@@ -65,7 +65,13 @@ In conclusion, TSP algorithm is the most appropriate solution paradigm for this 
 
 The algorithm that we have chosen to solve this problem is the classical TSP algorithm also known as the "brute-force" algorithm. The idea behind this algorithm is to generate all possible routes and then select the one with the shortest distance.
 
-The algorithm can be broken down into the following steps:
+The Traveling Salesman Problem (TSP) algorithm is a popular choice for bus route generation because it is a well-established algorithm that can quickly find the optimal route given a set of locations. TSP is an NP-hard problem, which means that it is computationally difficult to find the exact solution in a reasonable amount of time for large sets of data.
+
+Brute force is a method of solving TSP by systematically checking every possible route and selecting the one with the shortest total distance. This approach is very computationally intensive and can become infeasible for large numbers of locations. However, it is a simple and effective method for small sets of data, or as a reference point to compare the results of other algorithms.
+
+The brute force method is not the best choice for large number of location, so it can be used as a reference point to compare the results of other algorithms. Heuristic algorithms such as nearest neighbour, 2-opt, and simulated annealing can also be used to solve TSP problem, which are faster than brute force method.
+
+The selected algorithm can be broken down into the following steps:
 
 1\. Initialize an empty list to store all possible routes
 
@@ -221,25 +227,60 @@ Here is the most interesting part of the implementation, which I designed by mys
 
 At the very beginning of the project development, if one station is not selected, the distance to all the other destinations will be disordered. Remember that all distances stored inside one station, and the index will be the distance from the station to the station of this index.
 
-Therefore, I found that I could use the request from the different stops to pick up the station and the distance accordingly.
+Therefore, I found that I could use the request from the different stops to pick up the station and the distance accordingly. However, the core thought of the TSP algorithm is that the start point and the end point are never changed. 
 
-Let’s say, if there is only one station and the station’s index is 1 that has the request from the passengers, the array of the request will be: [0, 1, 0 ,0 ,0 ,0 ,0 ,0]. Then the only valid data will be:
+Let’s say, if there is only one station and the station’s index is 1 that has the request from the passengers, the array of the request will be: [1, 1, 0 ,0 ,0 ,0 ,0 ,0]. Then the only valid data will be:
 
-0: [0,4400]
+0: [0,4400], means that the distance from the start node to the node with the index of 1, is 4400(m),
 
-1: [4400,0]
+1: [4400,0], means that the distance from the node with the index of 1 to the distance of the node with the index of 0(start point) is 4400(m).
 
-Then, I need to remain the index of 0, and pick up the index 1 for the outer loop of the execution. Moreover, I need to pick up the inner loop of every value in index of 1 and 0, to be the “dynamicSelection”.
+These two lines will be the new "total" maps of this program. 
+
+If we look back to the original settings of the distance map in arrays:
+
+       
+ //    FSKTM MUTIARA 360    SC    EL   SKY   KTM   SPE
+ //	 	    0  		1 		2 		3  		4 		5 		6 		7
+/*0*/	{	0, 		4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM The start point will always be 1
+/*1*/	{	4000,	0,		1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
+/*2*/	{	4300,	1100,	0,		3100,	3500,	4400,	6500,	3100},//360
+/*3*/	{	5100,	1600,	1800,	0,		1500,	1500,	4300,	4600},//SC
+/*4*/	{	5600,	2900,	3500,	1400,	0,		1000,	4400,	5100},//EL
+/*5*/	{	6500,	3800,	4100,	1300,	1000,	0,		2600,	8100},//OS/SKY
+/*6*/	{	4100,	2700,	3000,	2200,	2700,	2600,	0,		6000},//KTM
+/*7*/	{	6500,	2600,	3100,	4000,	5100,	2600,	5300,	0   },//SPE
+
+If we do not extract the map like I did above, then the user's input could be let's say: [1, 0, 1 ,0 ,1 ,0 ,0 ,0].
+
+The map will be turing into:
+
+ //         FSKTM MUTIARA 360    SC    EL   SKY   KTM   SPE
+ //	 	        0  		1 		2 		3  		4 		5 		6 		7
+/*0     */	{	0, 		4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM The start point will always be 1
+/*2 to 1*/	{	4300,	1100,	0,		3100,	3500,	4400,	6500,	3100},//360        
+/*4 to 2*/	{	5600,	2900,	3500,	1400,	0,		1000,	4400,	5100},//EL
+
+
+As you can see, the distance from one node to the others will be totally in disordered. 
+
+The correct distance value from node 1 to node 2 is:
+
+/*1*/	{	4000,	0,		1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
+
+which is 1000.
+
+However, the wrongly updated maps will be showing the result of 0.
+
+Therefore, I need to remain the correct output only, which only extract the correct distances from one nodes to the any other nodes.
 
 ![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/19.png)
 
-The main method, to call out all the methods and operate the program.
+1. Firstly, we pick up all the "stations" that have been selected according to the "array" that is generated by the request from the passengers.
 
-After the “dynamicSelection”, the requested list of the stations is created. In the first for loop, it will accumulate the total distance for the display purpose. The array, [][]distance is from the created list of the requested station’s value of the distance.
+2. For each picked stations, which are all including the distances that from the "original" or "compeleted" maps. We only pick up and store the index of the array that has been requested. 
 
-Finish getting the number of the stops, and the distance information from the selected stops, we could finally call the algorithm method to output the path.
-
-The output formation will be print out the destinations one by one and finally print out the total distance of the shortest path.
+3. Update the distances information that stored in the picked stations.
 
 **5.7 Program testing**
 
