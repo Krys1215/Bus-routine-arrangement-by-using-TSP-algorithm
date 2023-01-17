@@ -240,8 +240,8 @@ These two lines will be the new "total" maps of this program.
 If we look back to the original settings of the distance map in arrays:
 ```
         return new int[][]{
- //       FSKTM     MUTIARA 360    SC     EL     SKY    KTM    SPE
- //	 	0  	1      2 	3  	4 	5 	6 	7
+ //             FSKTM   MUTIARA 360     SC      EL      SKY     KTM     SPE
+ //	 	0  	1       2 	3  	4 	5 	6 	7
 /*0*/	{	0, 	4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM, the start point will always be 1
 /*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
 /*2*/	{	4300,	1100,	0,	3100,	3500,	4400,	6500,	3100},//360
@@ -260,8 +260,8 @@ The map will be turing into:
 
 ```
         return new int[][]{
- //       FSKTM     MUTIARA 360    SC     EL     SKY    KTM    SPE
- //	 	0  	1      2 	3  	4 	5 	6 	7
+ //             FSKTM   MUTIARA 360     SC      EL      SKY     KTM     SPE
+ //	 	0  	1       2 	3  	4 	5 	6 	7
 /*0*/	{	0, 	4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM, the start point will always be 1
 /*2-1*/{	4300,	1100,	0,	3100,	3500,	4400,	6500,	3100},//360
 /*4-2*/{	5600,	2900,	3500,	1400,	0,	1000,	4400,	5100},//EL
@@ -272,6 +272,8 @@ As you can see, the distance from one node to the others will be totally in diso
 The correct distance value from node 1 to node 2 is:
 
 `
+//             FSKTM   MUTIARA  360     SC      EL      SKY     KTM     SPE
+ //	 	0  	1       2 	3  	4 	5 	6 	7
 /*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
 `
 
