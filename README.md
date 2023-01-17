@@ -99,6 +99,7 @@ The algorithm is a recursive one and it is based on the concept of backtracking.
 
 The optimization function of this algorithm is the calculation of the total distance traveled for each route. This function is used to compare the different routes and select the one with the shortest distance.
 
+
 # ***5. Algorithm Specification***
 
 ## **5.1 Problem definition**
@@ -641,7 +642,7 @@ Therefore, I need to remain the correct output only, which only extract the corr
 
 3. Update the distances information that stored in the picked stations.
 
-**5.7 Program testing**
+## **5.7 Program testing**
 
 As the assumption that we made, the route only travel through the “green lines”, will be less likely to experience the traffic jam, and the first test will be selecting a destination that is only connected with the “green lines”, for example, Starting point, SPE, and KTM Serdang.
 
@@ -684,6 +685,106 @@ Process finished with exit code 0
 ```
 
 The output is correct as well, and it indeed follow the shortest path.
+
+## **5.8. Comparison**
+
+### *1. Dijikstra:*
+
+Implementation:
+
+```java
+Graph graph = mapCreating(9);
+        Set<Integer> mustPass = new HashSet<>(Arrays.asList(1,2,3,4,5,6,7));//must past nodes
+        int[] distances = graph.shortestPaths(0,8,mustPass);
+        List<Integer> path = graph.buildPath(6);
+        for (int vertex : path) {
+            System.out.print(vertex + " ");
+```
+
+Result:
+
+```
+FSKTM -> Mutiara -> Univ 360 -> Sky Villa -> KTM
+
+Process finished with exit code 0
+```
+
+It will only show the shortest path, ignore the list of the must nodes, and it will not be turning back to the start node.
+The core idea of Dijikstra, to the find the shortest path from A to B, it does not care about the nodes that you have to let it pass and whether it will be going back to the starting point or not. 
+
+
+### *2. Prim's*
+
+Implementation:
+
+```
+List<List<Edge>> graph = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            graph.add(new ArrayList<>());
+        }
+        graph.get(0).add(new Edge(1, 1));
+        graph.get(0).add(new Edge(2, 1));
+        graph.get(1).add(new Edge(3, 2));
+        graph.get(2).add(new Edge(4, 10));
+        graph.get(3).add(new Edge(4,1));
+
+        // 找到从 0 号点开始的最小生成树
+        List<Edge> mst = minimumSpanningTree(graph, 0);
+
+        // 打印出最小生成树的边
+        for (Edge edge : mst) {
+            System.out.println(edge.to + " " + edge.weight);
+        }
+```
+
+Result:
+```
+1 1
+2 1
+3 2
+4 1
+
+Process finished with exit code 0
+```
+
+Prim's will be only showing the result of the minimum spanning tree, and it is not showing the result that we wanted to have.
+
+Meaning that, for the tree, it will never consider to going back to the "Root", it just to generate the tree that has the minimum cost. For the developers just to apply this idea in different data structures. 
+
+### *3. Kruskal's*
+
+Implementation:
+```
+List<List<Edge>> graph = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            graph.add(new ArrayList<>());
+        }
+        graph.get(0).add(new Edge(1, 1));
+        graph.get(0).add(new Edge(2, 1));
+        graph.get(1).add(new Edge(3, 2));
+        graph.get(2).add(new Edge(4, 10));
+        graph.get(3).add(new Edge(4,1));
+
+        // 找到从 0 号点开始的最小生成树
+        List<Edge> mst = minimumSpanningTree(graph, 0);
+
+        // 打印出最小生成树的边
+        for (Edge edge : mst) {
+            System.out.println(edge.to + " " + edge.weight);
+        }
+```
+
+Result:
+```
+1 1
+2 1
+3 2
+4 1
+
+Process finished with exit code 0
+```
+
+Even the result is similar with the Prim's one, but it is not fit for our problem due to the same problem that the Dijikstra has. 
 
 # ***6. Time Complexity***
 
