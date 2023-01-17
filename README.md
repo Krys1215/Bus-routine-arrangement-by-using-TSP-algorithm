@@ -229,44 +229,57 @@ At the very beginning of the project development, if one station is not selected
 
 Therefore, I found that I could use the request from the different stops to pick up the station and the distance accordingly. However, the core thought of the TSP algorithm is that the start point and the end point are never changed. 
 
-Let’s say, if there is only one station and the station’s index is 1 that has the request from the passengers, the array of the request will be: [1, 1, 0 ,0 ,0 ,0 ,0 ,0]. Then the only valid data will be:
+Let’s say, if there is only one station and the station’s index is 1 that has the request from the passengers, the array of the request will be: `[1, 1, 0 ,0 ,0 ,0 ,0 ,0]` . Then the only valid data will be:
 
-0: [0,4400], means that the distance from the start node to the node with the index of 1, is 4400(m),
+0: `[0,4400]` , means that the distance from the start node to the node with the index of 1, is 4400(m),
 
-1: [4400,0], means that the distance from the node with the index of 1 to the distance of the node with the index of 0(start point) is 4400(m).
+1: `[4400,0]` , means that the distance from the node with the index of 1 to the distance of the node with the index of 0(start point) is 4400(m).
 
 These two lines will be the new "total" maps of this program. 
 
 If we look back to the original settings of the distance map in arrays:
+`
+        return new int[][]{
+ //       FSKTM     MUTIARA 360    SC     EL     SKY    KTM    SPE
+ //	 	0  	1      2 	3  	4 	5 	6 	7
+/*0*/	{	0, 	4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM, the start point will always be 1
+/*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
+/*2*/	{	4300,	1100,	0,	3100,	3500,	4400,	6500,	3100},//360
+/*3*/	{	5100,	1600,	1800,	0,	1500,	1500,	4300,	4600},//SC
+/*4*/	{	5600,	2900,	3500,	1400,	0,	1000,	4400,	5100},//EL
+/*5*/	{	6500,	3800,	4100,	1300,	1000,	0,	2600,	8100},//OS/SKY
+/*6*/	{	4100,	2700,	3000,	2200,	2700,	2600,	0,	6000},//KTM
+/*7*/	{	6500,	2600,	3100,	4000,	5100,	2600,	5300,	0   },//SPE
+        };
+    }
+`  
 
-       
-   FSKTM MUTIARA 360  SC   EL    SKY   KTM   SPE
-    0     1     2     3     4     5     6     7
-0 { 0,    4400, 3800, 5100, 5600, 6500, 5900, 650},  FSKTM The start point will always be 1
-1 { 4000, 0,    1000, 2100, 3000, 3900, 6000, 4200}, MUTIARA
-2 { 4300, 1100, 0,    3100, 3500, 4400, 6500, 3100}, 360
-3 { 5100, 1600, 1800, 0,    1500, 1500, 4300, 4600}, SC
-4 { 5600, 2900, 3500, 1400, 0,    1000, 4400, 5100}, EL
-5 { 6500, 3800, 4100, 1300, 1000, 0,    2600, 8100}, OS/SKY
-6 { 4100, 2700, 3000, 2200, 2700, 2600, 0,    6000}, KTM
-7 { 6500, 2600, 3100, 4000, 5100, 2600, 5300, 0   }, SPE
-
-If we do not extract the map like I did above, then the user's input could be let's say: [1, 0, 1 ,0 ,1 ,0 ,0 ,0].
+If we do not extract the map like I did above, then the user's input could be let's say: `[1, 0, 1 ,0 ,1 ,0 ,0 ,0]`.
 
 The map will be turing into:
-
         FSKTM MUTIARA 360    SC    EL   SKY   KTM   SPE
           0     1     2     3     4     5     6     7
+          
 0       { 0,    4400, 3800, 5100, 5600, 6500, 5900, 650}, FSKTM The start point will always be 1
-2 to 1  { 4300, 1100, 0,    3100, 3500, 4400, 6500, 3100},360        
+
+2 to 1  { 4300, 1100, 0,    3100, 3500, 4400, 6500, 3100},360    
+
 4 to 2  { 5600, 2900, 3500, 1400, 0,    1000, 4400, 5100},EL
 
+`
+        return new int[][]{
+ //       FSKTM     MUTIARA 360    SC     EL     SKY    KTM    SPE
+ //	 	0  	1      2 	3  	4 	5 	6 	7
+/*0*/	{	0, 	4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM, the start point will always be 1
+/*2-1*/{	4300,	1100,	0,	3100,	3500,	4400,	6500,	3100},//360
+/*4-2*/{	5600,	2900,	3500,	1400,	0,	1000,	4400,	5100},//EL
+`
 
 As you can see, the distance from one node to the others will be totally in disordered. 
 
 The correct distance value from node 1 to node 2 is:
 
-1 { 4000, 0,    1000, 2100, 3000, 3900, 6000, 4200}, MUTIARA
+`/*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA`
 
 which is 1000.
 
