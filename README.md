@@ -1,5 +1,5 @@
 
-**1. Original Scenario**
+# ***1. Original Scenario***
        
 As all our team members are international students living outside the campus and do not own any car. Therefore, the school bus has been our main transportation tool, the bus line which is called “South City Line”. The original route of the “South City Line” is from the campus to Mutiara Residence, Univ360 Residence, South City Plaza, East Lake Residence, Sky Villa Residence, KTM Serdang, and turn back to the campus. It is believed that all the bus takers have experienced the traffic jam during the route around South City Plaza. Generally, there are certain number of international students are living near to the KTM Serdang, The Mines Resort, the traffic jam of the route from the campus to KTM Serdang is not heavy, and we can find it when we take the Grab ride. Moreover, there is a Free Bus line of Rapid KL called “SJ04”, which is covering the route from KTM Serdang to our campus, and it is our second plan to travel from home to campus, the passengers can tell the driver what their destinations are, and the driver can adjust the route by themselves. The drivers would love to avoid the route around South City Plaza to avoid the terrible traffic jam. The action the drivers took really inspired us, and we decide to do some improvements.
 
@@ -11,7 +11,7 @@ As Figure 1 shown above, we were thinking about developing an application base o
 
 
         
-**2. Optimal Solution**
+# ***2. Optimal Solution***
 
 Finding an optimal solution for this scenario is important for several reasons.
 
@@ -29,7 +29,7 @@ Improved punctuality: By allowing users to schedule appointments for their bus r
 
 In summary, finding an optimal solution for this scenario is crucial to improve the overall transportation experience for the university community and to enhance the university's image.
 
-**3. Review of the solution paradigm (Sorting, DAC, DP, Greedy, and Graph)**
+# ***3. Review of the solution paradigm (Sorting, DAC, DP, Greedy, and Graph)***
 
 *Sorting algorithm*:
 
@@ -63,7 +63,7 @@ Weaknesses: It can be computationally expensive for large data sets and can lead
 
 In conclusion, TSP algorithm is the most appropriate solution paradigm for this problem as it is specifically designed to solve the problem of finding the shortest route that visits a set of locations and returns to the starting point. Other algorithms such as sorting, DAC, DP, greedy and graph algorithms can also be considered but they may not be able to find the optimal solution for this problem and may come with computational limitations.
 
-**4. Designing Algorithm, and Idea.**
+# ***4. Designing Algorithm, and Idea.***
 
 The algorithm that we have chosen to solve this problem is the classical TSP algorithm also known as the "brute-force" algorithm. The idea behind this algorithm is to generate all possible routes and then select the one with the shortest distance.
 
@@ -93,9 +93,9 @@ The algorithm is a recursive one and it is based on the concept of backtracking.
 
 The optimization function of this algorithm is the calculation of the total distance traveled for each route. This function is used to compare the different routes and select the one with the shortest distance.
 
-**5. Algorithm Specification**
+# ***5. Algorithm Specification***
 
-**5.1 Problem definition**
+## **5.1 Problem definition**
 
 Given a set of bus stops, find the shortest route that visits all the stops and returns to the starting point.
 
@@ -107,7 +107,7 @@ Given a set of bus stops, find the shortest route that visits all the stops and 
 
 This problem definition provides a clear and precise understanding of the problem that the algorithm is meant to solve, and what the inputs and outputs of the algorithm should be. It also lays out the constraints that the algorithm needs to consider when finding a solution.
 
-**5.2 Development of model**
+## **5.2 Development of model**
 
 ![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/2.png)
 
@@ -141,9 +141,9 @@ The data structure will be Array List and store the stops information that concl
 
 *The Array that contains the distance and the indexes of the stops*
 
-**5.3 Specification of an algorithm**
+## **5.3 Specification of an algorithm**
 
-**5.3.1 Traveling Salesman Problem algorithm**
+### **5.3.1 Traveling Salesman Problem algorithm**
 
 The TSP can be formulated as an integer linear program. Several formulations are known. Two notable formulations are the Miller–Tucker–Zemlin (MTZ) formulation and the Dantzig–Fulkerson–Johnson (DFJ) formulation. The DFJ formulation is stronger, though the MTZ formulation is still useful in certain settings.
 
@@ -161,7 +161,7 @@ Without further constraints, the ![](https://github.com/Krys1215/Course-Design-A
 
 These ensure that the chosen set of edges locally looks like that of a tour, but still allow for solutions violating the global requirement that there is one tour which visits all vertices, as the edges chosen could make up several tours each visiting only a subset of the vertices; arguably it is this global requirement that makes TSP a hard problem. The MTZ and DFJ formulations differ in how they express this final requirement as linear constraints.
 
-**5.3.2 Steps of TSP Algorithm in Pseudocode**
+### **5.3.2 Steps of TSP Algorithm in Pseudocode**
 
 The TSP algorithm is a recursive algorithm that generates all possible routes and then selects the one with the shortest distance as the optimal route.
 
@@ -253,7 +253,7 @@ select_optimal_route(routes)
 
 ```
 
-**5.4 Designing an Algorithm**
+## **5.4 Designing an Algorithm**
 
 In order to satisfy the requirements of our bus route designing problem, we need to modify the TSP algorithm to apply the algorithm in Java.
 
@@ -380,7 +380,7 @@ The implementation design will be explained later in the next 5.6 section. Ignor
 
 Which exactly the same with the original route design of our school bus and the output of our program.
 
-**5.6 Implementation of an algorithm**
+## **5.6 Implementation of an algorithm**
 
 According to the initial thought that we came up with in the first part of our report, we wanted to develop an application that allows students or the bus takers to make the bus appointment at the period of time before the departure of the bus. Therefore, we involve the function to let the user to input “1” if there are any passengers intend to take the bus, “0” means there is no passenger call for the application and the bus will not consider to pass the stop.
 
@@ -651,7 +651,7 @@ Process finished with exit code 0
 
 The output is correct as well, and it indeed follow the shortest path.
 
-**6. Time Complexity**
+# ***6. Time Complexity***
 
 1\. Best-case time complexity: This is the scenario where the algorithm performs the best, typically when the input is already sorted or in the optimal configuration. The best-case time complexity of the TSP algorithm is O(n!) where n is the number of stops.
 
@@ -661,7 +661,7 @@ The output is correct as well, and it indeed follow the shortest path.
 
 It's worth mentioning that the TSP problem is an NP-hard problem, which means that no algorithm with polynomial time complexity (O(n\^k) for some constant k) is known. The complexity of the TSP problem is O(n!) which is impractical for large input sizes, that's why there are many heuristics and approximate solutions that have been proposed to solve the TSP problem more efficiently.
 
-**7. Reference**
+# ***7. Reference***
 
 [1] Papadimitriou, C.H.; Steiglitz, K. (1998), Combinatorial optimization: algorithms and complexity, Mineola, NY: Dover, pp.308-309.
 
