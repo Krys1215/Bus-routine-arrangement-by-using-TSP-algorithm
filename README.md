@@ -717,7 +717,7 @@ The core idea of Dijikstra, to the find the shortest path from A to B, it does n
 
 Implementation:
 
-```
+```java
 List<List<Edge>> graph = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             graph.add(new ArrayList<>());
@@ -754,7 +754,7 @@ Meaning that, for the tree, it will never consider to going back to the "Root", 
 ### *3. Kruskal's*
 
 Implementation:
-```
+```java
 List<List<Edge>> graph = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             graph.add(new ArrayList<>());
