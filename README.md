@@ -238,7 +238,7 @@ Let’s say, if there is only one station and the station’s index is 1 that ha
 These two lines will be the new "total" maps of this program. 
 
 If we look back to the original settings of the distance map in arrays:
-```
+```java
         return new int[][]{
  //             FSKTM   MUTIARA 360     SC      EL      SKY     KTM     SPE
  //	 	0  	1       2 	3  	4 	5 	6 	7
