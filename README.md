@@ -258,7 +258,7 @@ If we do not extract the map like I did above, then the user's input could be le
 
 The map will be turing into:
 
-```
+```java
         return new int[][]{
  //             FSKTM   MUTIARA 360     SC      EL      SKY     KTM     SPE
  //	 	0  	1       2 	3  	4 	5 	6 	7
@@ -271,11 +271,11 @@ As you can see, the distance from one node to the others will be totally in diso
 
 The correct distance value from node 1 to node 2 is:
 
-`
+```java
 //             FSKTM   MUTIARA  360     SC      EL      SKY     KTM     SPE
  //	 	0  	1       2 	3  	4 	5 	6 	7
 /*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
-`
+```
 
 which is `1000`.
 
