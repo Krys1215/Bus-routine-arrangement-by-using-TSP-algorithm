@@ -362,21 +362,49 @@ After the implementation of the graph that we extracted, the result is below:
    ---Default Start Point: FSKTM---
 Mutiara Residence: 1
 Univ 360 Residence: 1
-South City Plaza: 1
-East Lake Residence: 1
+South City Plaza: 0
+East Lake Residence: 0
 Skyvilla Residence: 1
 KTM Serdang: 1
-SPE: 1
-Bus Parking Square -> Mutiara Residence -> Univ 360 Residence -> South City Plaza -> East Lake Residence -> Skyvilla Residence -> KTM Serdang -> SPE -> Bus Parking Square -> END
-The shortest distance: 31950m
-
-Process finished with exit code 0
+SPE: 0
+Bus Parking Square -> Mutiara Residence -> Univ 360 Residence -> Skyvilla Residence -> KTM Serdang -> Bus Parking Square -> END
+The shortest distance: 20600m
 
 ```
 
 The implementation design will be explained later in the next 5.6 section. Ignoring the implementation of this design, according to the graph that we extracted, the shortest path that we choose by our hands is below:
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.png)
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.1.png)
+
+Assuming that the requests from the users are from Mutiara, Univ 360, KTM and Sky Villa. In the version of array is: 
+`
+[1, 1, 1 ,0 ,0 ,1 ,1]
+`
+First it will start from the start point to every adjacent node.
+
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.2.png)
+
+
+Then, it will keep travel though the nodes following by the sequence of the index in the array and start from each node that following by the sequence. 
+
+For example, for the Mutiara branch.
+
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.3.png)
+
+Every route in the recursive execution will be stored. And then continue from the adjacent nodes of the Mutiara node to travel. 
+
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.4.png)
+
+Keep the execution set previously.
+
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/14.5.png)
+
+Until travel back to the starting node, FSKTM.
+
+Then, after all recursive execution is done, the storing array will be comparing the distance in total, while to deduct the longer distance to only remain the shorter distance from loop to loop.
+
+That was the example of one travel, the same execution will be running with each of the adjacent node. 
+
 
 Which exactly the same with the original route design of our school bus and the output of our program.
 
