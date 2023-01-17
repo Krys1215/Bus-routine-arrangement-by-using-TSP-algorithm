@@ -121,9 +121,23 @@ The default starting point is setting as FSKTM and be the ending point. The core
 
 The data structure will be Array List and store the stops information that conclude the distance from this stop to others. The basic data structure will be initialized as below in the format of binary array:
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/4.png)
+```java
+        return new int[][]{
+ //             FSKTM   MUTIARA 360     SC      EL      SKY     KTM     SPE
+ //	 	0  	1       2 	3  	4 	5 	6 	7
+/*0*/	{	0, 	4400,	3800,	5100,	5600,	6500,	5900,	650}, //FSKTM, the start point will always be 1
+/*1*/	{	4000,	0,	1000,	2100,	3000,	3900,	6000,	4200},//MUTIARA
+/*2*/	{	4300,	1100,	0,	3100,	3500,	4400,	6500,	3100},//360
+/*3*/	{	5100,	1600,	1800,	0,	1500,	1500,	4300,	4600},//SC
+/*4*/	{	5600,	2900,	3500,	1400,	0,	1000,	4400,	5100},//EL
+/*5*/	{	6500,	3800,	4100,	1300,	1000,	0,	2600,	8100},//OS/SKY
+/*6*/	{	4100,	2700,	3000,	2200,	2700,	2600,	0,	6000},//KTM
+/*7*/	{	6500,	2600,	3100,	4000,	5100,	2600,	5300,	0   },//SPE
+        };
+    }
+```
 
-*Figure 4 The Array that contains the distance and the indexes of the stops*
+*The Array that contains the distance and the indexes of the stops*
 
 **5.3 Specification of an algorithm**
 
@@ -167,19 +181,165 @@ The TSP algorithm is a recursive algorithm that generates all possible routes an
 
 Below is the pseudocode implementation.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/9.png)
+```c
+TSP(Graph g)
+{
+    // Initialize an empty list to store all possible routes
+    routes = []
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/10.png)
+    // Generate all possible routes
+    generate_routes(g, [], 0, routes)
+
+    // Select the route with the shortest distance as the optimal route
+    optimal_route = select_optimal_route(routes)
+
+    return optimal_route
+}
+
+generate_routes(Graph g, route, current_vertex, routes)
+{
+    // Base case: If all vertices have been visited
+    if(route contains all vertices in g)
+    {
+        // Add the route to the list of routes
+        routes.append(route)
+        return
+    }
+
+    // Recursive case: visit the remaining vertices
+    for each vertex v in g
+    {
+        if v is not in route
+        {
+            // Add vertex v to the current route
+            route.append(v)
+
+            // Recursively generate routes
+            generate_routes(g, route, v, routes)
+
+            // Remove vertex v from the current route
+            route.pop()
+        }
+    }
+}
+
+select_optimal_route(routes)
+{
+    // Initialize the optimal route to the first route
+    optimal_route = routes[0]
+
+    // Initialize the shortest distance to the distance of the first route
+    shortest_distance = calculate_distance(optimal_route)
+
+    // Iterate over the remaining routes
+    for i = 1 to routes.length
+    {
+        // Calculate the distance of the current route
+        distance = calculate_distance(routes[i])
+
+        // Compare the distance of the current route to the shortest distance
+        if(distance < shortest_distance)
+        {
+            // Update the optimal route and the shortest distance
+            optimal_route = routes[i]
+            shortest_distance = distance
+        }
+    }
+
+    return optimal_route
+}
+
+```
 
 **5.4 Designing an Algorithm**
 
 In order to satisfy the requirements of our bus route designing problem, we need to modify the TSP algorithm to apply the algorithm in Java.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/11.png)
-
 This code shows the procedure of the initialization of the data structures and the instance. The variables of the data structure need to be sign as the specific value. As we mentioned before. For example, the graph will be extracted as a binary array. The best paths will be stored in an Integer List.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/12.png)
+```java
+public class TSP {
+    // 小区数量
+    //the number of destinations
+    private int cityNum;
+    // 距离矩阵
+    //graph
+    private int[][] distance;
+    // 最优路径
+    //best path
+    private List<Integer> bestPath;
+    // 最优距离
+    //shortest distance
+    private int bestDistance;
+
+    public TSP(int cityNum, int[][] distance) {
+        this.cityNum = cityNum;
+        this.distance = distance;
+        this.bestPath = new ArrayList<>();
+        this.bestDistance = Integer.MAX_VALUE;
+    }
+
+    public void tsp() {
+        // 初始化最优路径
+        //initialize the best path
+        bestPath.add(0);
+        // 从小区0开始旅行
+        //start from the first residence or stop
+        travel(0, 1, 0, bestPath);
+    }
+
+    private void travel(int city, int n, int dis, List<Integer> path) {
+        // 所有小区都已经访问过
+        //check if all the stop is visited
+        if (n == cityNum) {
+            // 加上最后一次旅行的距离
+            //plu the last distance
+            dis += distance[city][0];
+            // 更新最优解
+            //update the best solution
+            if (dis < bestDistance) {
+                bestDistance = dis;
+                bestPath = new ArrayList<>(path);
+                bestPath.add(0);
+            }
+            return;
+        }
+// 遍历其他所有小区
+        //traversal all the other destinations
+        for (int i = 0; i < cityNum; i++) {
+// 当前小区已经访问过，跳过
+            //if visited, skip
+            if (path.contains(i)) {
+                continue;
+            }
+// 加上当前城市到下一个小区的距离
+            //add on the distance till the next stop
+            int newDis = dis + distance[city][i];
+// 剪枝：如果当前距离已经大于已知的最优距离，则无需继续搜索
+            //pruning
+            if (newDis >= bestDistance) {
+                continue;
+            }
+// 将当前城市加入路径
+            //add the current destination to the path
+            path.add(i);
+// 继续旅行
+            //keep travelling
+            travel(i, n + 1, newDis, path);
+// 回溯
+            //recall
+            path.remove(path.size() - 1);
+        }
+    }
+
+    public List<Integer> getBestPath() {
+        return bestPath;
+    }
+
+    public int getBestDistance() {
+        return bestDistance;
+    }
+```
 
 1\. Firstly, the calling of the algorithm is beginning with the method “tsp()”, we consider it as the “trigger” of this algorithm. It adds the first stop (index “0”) to the bestPath List, and then call the “travel()” method. The values included inside this method are: index of the stops, count number of the recursive, total distance, the path that have traveled for one execution.
 
@@ -195,7 +355,22 @@ This code shows the procedure of the initialization of the data structures and t
 
 After the implementation of the graph that we extracted, the result is below:
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/13.png)
+```
+------Request pick-up:1, no:0------
+   ---Default Start Point: FSKTM---
+Mutiara Residence: 1
+Univ 360 Residence: 1
+South City Plaza: 1
+East Lake Residence: 1
+Skyvilla Residence: 1
+KTM Serdang: 1
+SPE: 1
+Bus Parking Square -> Mutiara Residence -> Univ 360 Residence -> South City Plaza -> East Lake Residence -> Skyvilla Residence -> KTM Serdang -> SPE -> Bus Parking Square -> END
+The shortest distance: 31950m
+
+Process finished with exit code 0
+
+```
 
 The implementation design will be explained later in the next 5.6 section. Ignoring the implementation of this design, according to the graph that we extracted, the shortest path that we choose by our hands is below:
 
@@ -207,21 +382,118 @@ Which exactly the same with the original route design of our school bus and the 
 
 According to the initial thought that we came up with in the first part of our report, we wanted to develop an application that allows students or the bus takers to make the bus appointment at the period of time before the departure of the bus. Therefore, we involve the function to let the user to input “1” if there are any passengers intend to take the bus, “0” means there is no passenger call for the application and the bus will not consider to pass the stop.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/15.png)
+```
+------Request pick-up:1, no:0------
+   ---Default Start Point: FSKTM---
+Mutiara Residence: 1
+Univ 360 Residence: 1
+South City Plaza: 1
+East Lake Residence: 1
+Skyvilla Residence: 1
+KTM Serdang: 1
+SPE: 1
+```
 
 In order to make it easier to store the stop information, we create a class to store all the bus stops’ information:
 
 It concludes the name of the station, for us to print out the name in the later output section. The index is to set the index of the stop, to match with the distance from “index to index”. The array of distance is to record the distances from the current station to others’ distance.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/16.png)
+```java
+class Station{
+    String name;
+    int index;
+    int[] distance;
+
+    public Station(String name, int index, int[] distance) {
+        this.name = name;
+        this.index = index;
+        this.distance = distance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public int[] getDistance() {
+        return distance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setDistance(int[] distance) {
+        this.distance = distance;
+    }
+}
+```
 
 This method is to create an Array List to store all the information of all the stations.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/17.png)
+```java
+    public static ArrayList<Station> stationCreation(){
+
+        Station fsktm = new Station("Bus Parking Square",0, new int[]{0, 4400, 3800, 5100, 5600, 6500, 5900, 650});//start point
+        Station mutiara = new Station("Mutiara Residence",1, new int[]{4000, 0, 1000, 2100, 3000, 3900, 6000, 4200});
+        Station univ360 = new Station("Univ 360 Residence",2, new int[]{4300, 1100, 0, 3100, 3500, 4400, 6500, 3100});
+        Station southCity = new Station("South City Plaza",3, new int[]{5100, 1600, 1800, 0, 1500, 1500, 4300, 4600});
+        Station eastLake = new Station("East Lake Residence",4, new int[]{5600, 2900, 3500, 1400, 0, 1000, 4400, 5100});
+        Station skyVilla = new Station("Skyvilla Residence",5, new int[]{6500, 3800, 4100, 1300, 1000, 0, 2600, 8100});
+        Station ktm = new Station("KTM Serdang", 6, new int[]{4100, 2700, 3000, 2200, 2700, 2600, 0, 6000});
+        Station spe = new Station("SPE",7, new int[]{6500, 2600, 3100, 4000, 5100, 2600, 5300, 0});
+        ArrayList<Station> arrayList = new ArrayList<>();
+        arrayList.add(fsktm);
+        arrayList.add(mutiara);
+        arrayList.add(univ360);
+        arrayList.add(southCity);
+        arrayList.add(eastLake);
+        arrayList.add(skyVilla);
+        arrayList.add(ktm);
+        arrayList.add(spe);
+        return arrayList;
+    }
+```
 
 For the passengerCall() method, is to store the calling value from the passengers, and store all the request into an array, in order to match the index of the stops. “1” for there is passenger, and “0” for no passenger.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/18.png)
+```java
+//来读取用户的call，有就是1，没有就是0. 这个返回的数列就是可以摘选出“完整的数列中” 谁被挑选了。用1和0来区别
+    //use 1s and 0s to know which stations is selected.
+    public static int[] passengerCall(){
+
+        int[]array = new int[8];
+        Scanner scan = new Scanner(System.in);
+        System.out.println("------Request pick-up:1, no:0------" +
+                "\n   ---Default Start Point: FSKTM---");
+        //System.out.print("FSKTM: ");
+        //array[0] = scan.nextInt();
+        array[0] = 1;
+        System.out.print("Mutiara Residence: ");
+        array[1] = scan.nextInt();
+        System.out.print("Univ 360 Residence: ");
+        array[2] = scan.nextInt();
+        System.out.print("South City Plaza: ");
+        array[3] = scan.nextInt();
+        System.out.print("East Lake Residence: ");
+        array[4] = scan.nextInt();
+        System.out.print("Skyvilla Residence: ");
+        array[5] = scan.nextInt();
+        System.out.print("KTM Serdang: ");
+        array[6] = scan.nextInt();
+        System.out.print("SPE: ");
+        array[7] = scan.nextInt();
+        //TEST: System.out.println(Arrays.toString(array));
+        return array;
+    }
+```
 
 Here is the most interesting part of the implementation, which I designed by myself to call the stations.
 
@@ -293,7 +565,39 @@ However, the wrongly updated maps will be showing the result of
 
 Therefore, I need to remain the correct output only, which only extract the correct distances from one nodes to the any other nodes.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/19.png)
+```java
+//Using English to explain this method:
+    //I found that if i wanted to let user to choose the station, i need to delete some of the stations inside the original whole arraylist
+    //that contains all the stations. if i do so, the index will not be matched. e.g. for the row 0, column 2 means that the distance between
+    //node0 to node2 is some value. but, if i delete one row, the distance will not be matched anymore.
+    public static ArrayList<Station> dynamicStationSelection(int[]array, ArrayList<Station>arrayList){//array是选定的站
+        //to store the selected station based on the "array" with 1s and 0s.
+        ArrayList<Station> firstSelectedStation= new ArrayList<>();
+
+        ArrayList<Integer>secondSelectedDistance = new ArrayList<>();
+        //to select the previous selected stations
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == 1){
+                firstSelectedStation.add(arrayList.get(i));
+            }
+        }
+        //The indexes of selected elements inside the arrays of selected Stations' indexes is matched
+        //so i just need to extract the selected indexes' array to initialize the graph
+        for (int i = 0; i < firstSelectedStation.size(); i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (array[j] == 1){
+                    secondSelectedDistance.add(firstSelectedStation.get(i).distance[j]);
+                }
+            }
+            int[] arrayTemp = secondSelectedDistance.stream().mapToInt(k -> k).toArray();
+            //to change the "distance" attribute to selected "distance" array.
+            firstSelectedStation.get(i).setDistance(arrayTemp);
+        }
+        //TEST System.out.println(firstSelectedStation.get(1).name);
+        return firstSelectedStation;
+    }
+}
+```
 
 1. Firstly, we pick up all the "stations" that have been selected according to the "array" that is generated by the request from the passengers.
 
@@ -305,13 +609,43 @@ Therefore, I need to remain the correct output only, which only extract the corr
 
 As the assumption that we made, the route only travel through the “green lines”, will be less likely to experience the traffic jam, and the first test will be selecting a destination that is only connected with the “green lines”, for example, Starting point, SPE, and KTM Serdang.
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/20.png)
+`
+------Request pick-up:1, no:0------
+   ---Default Start Point: FSKTM---
+Mutiara Residence: 0
+Univ 360 Residence: 0
+South City Plaza: 0
+East Lake Residence: 0
+Skyvilla Residence: 0
+KTM Serdang: 1
+SPE: 1
+Bus Parking Square -> KTM Serdang -> SPE -> Bus Parking Square -> END
+The shortest distance: 6550m
+
+Process finished with exit code 0
+
+`
 
 The output is totally correct and satisfying with our assumption.
 
 Another example of the testing will be only select the stations that connect with the red lines:
 
-![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project/blob/main/21.png)
+`
+------Request pick-up:1, no:0------
+   ---Default Start Point: FSKTM---
+Mutiara Residence: 1
+Univ 360 Residence: 1
+South City Plaza: 1
+East Lake Residence: 1
+Skyvilla Residence: 1
+KTM Serdang: 0
+SPE: 0
+Bus Parking Square -> Mutiara Residence -> Univ 360 Residence -> South City Plaza -> East Lake Residence -> Skyvilla Residence -> Bus Parking Square -> END
+The shortest distance: 25400m
+
+Process finished with exit code 0
+
+`
 
 The output is correct as well, and it indeed follow the shortest path.
 
