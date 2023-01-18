@@ -360,7 +360,7 @@ public class TSP {
 
 5\. path.remove(path.size() - 1) is for the recalling purpose, if the all the recursive execution is terminated.
 
-**5.5 Checking the correctness of an algorithm**
+## **5.5 Checking the correctness of an algorithm**
 
 After the implementation of the graph that we extracted, the result is below:
 
