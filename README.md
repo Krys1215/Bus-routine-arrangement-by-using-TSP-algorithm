@@ -823,27 +823,27 @@ The recursive tree:
 
 The recursive equation can be obtained as follows:
 
-<img src="[images//image-20230118144232926.png](https://github.com/cs-buzz/TSP-Dynamic-Programming-for-SSK4106/blob/main/images/image-20230118144232926.png)" alt="image-20230118144232926" style="zoom: 33%;" />
+<img src="[31](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/31.png)" style="zoom: 33%;" />
 
 Now, we're going to find the optimal solution from the bottom up:
 
-<img src="images//image-20230118144530415.png" alt="image-20230118144530415" style="zoom: 33%;" />
+<img src="[32](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/32.png)" style="zoom: 33%;" />
 
 The bottom level will be:
 
-<img src="images//image-20230118144605763.png" alt="image-20230118144605763" style="zoom: 33%;" />
+<img src="[33](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/33.png)" style="zoom: 33%;" />
 
 The second last level will be:
 
-<img src="images//image-20230118144706599.png" alt="image-20230118144706599" style="zoom: 33%;" />
+<img src="[34](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/34.png)" style="zoom: 33%;" />
 
 The thrid last level will be:
 
-<img src="images//image-20230118144853411.png" alt="image-20230118144853411" style="zoom: 33%;" />
+<img src="[35](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/35.png)" style="zoom: 33%;" />
 
 Finally, we reach to the top level and got the optimal path:
 
-<img src="images//image-20230118145130646.png" alt="image-20230118145130646" style="zoom: 33%;" />
+<img src="[36](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/36.png)" style="zoom: 33%;" />
 
 
 ## Pseudocode
@@ -858,7 +858,7 @@ Finally, the algorithm returns the minimum distance as a TSP solution.
 
 **Here we use a dynamic approach to calculate the cost function** ![\mathbf{Cost()}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-41356a186bcf2eff13fad443f822f1d2_l3.svg)**.** Using recursive calls, we calculate the cost function for each subset of the original problem.
 
-<img src="images//image-20230118160511190.png" alt="image-20230118160511190" style="zoom: 33%;" />
+<img src="https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/39.png"  style="zoom: 33%;" />
 
 ## Time Complexity
 
@@ -866,7 +866,7 @@ In the dynamic algorithm for TSP, the number of possible subsets can be at most 
 
 ## Output
 
-<img src="images//image-20230118162517835.png" alt="image-20230118162517835" style="zoom:50%;" />
+<img src="https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/40.png" alt="image-20230118162517835" style="zoom:50%;" />
 
 # ***7. Reference***
 
