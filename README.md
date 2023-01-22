@@ -823,27 +823,27 @@ The recursive tree:
 
 The recursive equation can be obtained as follows:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/31.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/31.png)
 
 Now, we're going to find the optimal solution from the bottom up:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/32.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/32.png)
 
 The bottom level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/33.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/33.png)
 
 The second last level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/34.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/34.png)
 
 The thrid last level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/35.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/35.png)
 
 Finally, we reach to the top level and got the optimal path:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/36.png)" alt="img" style="zoom: 33%;" />
+![](https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/36.png)
 
 
 ## Pseudocode
