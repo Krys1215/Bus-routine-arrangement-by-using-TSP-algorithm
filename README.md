@@ -796,7 +796,7 @@ Even the result is similar with the Prim's one, but it is not fit for our proble
 
 It's worth mentioning that the TSP problem is an NP-hard problem, which means that no algorithm with polynomial time complexity (O(n\^k) for some constant k) is known. The complexity of the TSP problem is O(n!) which is impractical for large input sizes, that's why there are many heuristics and approximate solutions that have been proposed to solve the TSP problem more efficiently.
 
-# ***7. Dynamic Programming Approach ***
+# ***7. Dynamic Programming Approach***
 ## Optimal substructure
 
 Suppose FSKTM is the start point and the path `FSKTM r1 r2 ... rn-1 rn FKKTM` is the optimal shotest path from the off-campus residences `{FSKTM, r1, r2, ..., rn-1, rn, FSKTM}` to the campus. 
@@ -844,7 +844,6 @@ The thrid last level will be:
 Finally, we reach to the top level and got the optimal path:
 
 <img src="images//image-20230118145130646.png" alt="image-20230118145130646" style="zoom: 33%;" />
-
 
 
 ## Pseudocode
