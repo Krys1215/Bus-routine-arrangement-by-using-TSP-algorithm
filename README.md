@@ -796,6 +796,79 @@ Even the result is similar with the Prim's one, but it is not fit for our proble
 
 It's worth mentioning that the TSP problem is an NP-hard problem, which means that no algorithm with polynomial time complexity (O(n\^k) for some constant k) is known. The complexity of the TSP problem is O(n!) which is impractical for large input sizes, that's why there are many heuristics and approximate solutions that have been proposed to solve the TSP problem more efficiently.
 
+# ***7. Dynamic Programming Approach ***
+## Optimal substructure
+
+Suppose FSKTM is the start point and the path `FSKTM r1 r2 ... rn-1 rn FKKTM` is the optimal shotest path from the off-campus residences `{FSKTM, r1, r2, ..., rn-1, rn, FSKTM}` to the campus. 
+
+Extracting any sub-path from this path, such as `FSKTM r1 r2 ... ri`, which is  the exactly optimal shortest path from FSKTM to ri passing by other residences only once among the off-campus residences `{FSKTM, r1, r2, ..., ri}` to the campus.
+
+## Overlapping subproblems
+
+For example, these two paths have the same subproblem `r4 ... rn-1 rn`.
+
+`FSKTM r2 r3 r4 ... rn`  and `FSKTM r3 r2 r4 ... rn`
+
+## DP Solution
+
+Define TSP(c1, C, ci) that refers to the optimal solution 
+
+The school bus will begin with residence c1, passing by all residences from the set C, to residence ci.
+
+The recursive tree:
+
+<img src="https://img-blog.csdnimg.cn/20190923192924546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTU5NjQx,size_16,color_FFFFFF,t_70" alt="img" style="zoom:60%;" />
+
+<img src="https://img-blog.csdnimg.cn/20190923192935826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTU5NjQx,size_16,color_FFFFFF,t_70" alt="img" style="zoom:60%;" />
+
+The recursive equation can be obtained as follows:
+
+<img src="images//image-20230118144232926.png" alt="image-20230118144232926" style="zoom: 33%;" />
+
+Now, we're going to find the optimal solution from the bottom up:
+
+<img src="images//image-20230118144530415.png" alt="image-20230118144530415" style="zoom: 33%;" />
+
+The bottom level will be:
+
+<img src="images//image-20230118144605763.png" alt="image-20230118144605763" style="zoom: 33%;" />
+
+The second last level will be:
+
+<img src="images//image-20230118144706599.png" alt="image-20230118144706599" style="zoom: 33%;" />
+
+The thrid last level will be:
+
+<img src="images//image-20230118144853411.png" alt="image-20230118144853411" style="zoom: 33%;" />
+
+Finally, we reach to the top level and got the optimal path:
+
+<img src="images//image-20230118145130646.png" alt="image-20230118145130646" style="zoom: 33%;" />
+
+
+
+## Pseudocode
+
+In this algorithm, we take a subset ![N](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-7354bae77b50b7d1faed3e8ea7a3511a_l3.svg) of the required residences needs to be visited, distance among the residences ![dist](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-2ce9cbaa8582e5f4e29beb3405bdf0a6_l3.svg) and starting residence ![s](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-1edc883862ceed1a21913f60358e31d8_l3.svg) as inputs. Each residence is identified by unique residence id like ![\left\{1, 2, 3, \cdots, n \right\}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-a1d25d35634cd9bbd0f8361701bda45c_l3.svg).
+
+Initially, all residences are unvisited, and the visit starts from the residence ![s](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-1edc883862ceed1a21913f60358e31d8_l3.svg). We assume that the initial travelling cost is equal to ![\mathsf{0}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-d8fb28da77ac7ddb2b8cfcaf8f053657_l3.svg). Next, the TSP distance value is calculated based on a recursive function. If the number of residences in the subset is two, then the recursive function returns their distance as a base case.
+
+On the other hand, if the number of residences is greater than ![\mathsf{2}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-276c2cef464470f3f58000ea412deecd_l3.svg), then we’ll calculate the distance from the current residence to the nearest residence, and the minimum distance among the remaining residences is calculated recursively.
+
+Finally, the algorithm returns the minimum distance as a TSP solution.
+
+**Here we use a dynamic approach to calculate the cost function** ![\mathbf{Cost()}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-41356a186bcf2eff13fad443f822f1d2_l3.svg)**.** Using recursive calls, we calculate the cost function for each subset of the original problem.
+
+<img src="images//image-20230118160511190.png" alt="image-20230118160511190" style="zoom: 33%;" />
+
+## Time Complexity
+
+In the dynamic algorithm for TSP, the number of possible subsets can be at most ![N \times 2^N](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-8c75ccdfe509d807faec0bb94d5792e9_l3.svg). Each subset can be solved in ![\mathcal{O}(N)](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-ab41c7d544362b628c11ae7bfd668105_l3.svg) times. **Therefore, the time complexity of this algorithm would be** ![\mathbf{\mathcal{O}(N^{2} \times 2^N)}](https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-ddad895a7478462ef0251a4195d5a131_l3.svg).
+
+## Output
+
+<img src="images//image-20230118162517835.png" alt="image-20230118162517835" style="zoom:50%;" />
+
 # ***7. Reference***
 
 [1] Papadimitriou, C.H.; Steiglitz, K. (1998), Combinatorial optimization: algorithms and complexity, Mineola, NY: Dover, pp.308-309.
