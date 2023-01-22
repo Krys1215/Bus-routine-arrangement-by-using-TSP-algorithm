@@ -823,7 +823,7 @@ The recursive tree:
 
 The recursive equation can be obtained as follows:
 
-<img src="images//image-20230118144232926.png" alt="image-20230118144232926" style="zoom: 33%;" />
+<img src="[images//image-20230118144232926.png](https://github.com/cs-buzz/TSP-Dynamic-Programming-for-SSK4106/blob/main/images/image-20230118144232926.png)" alt="image-20230118144232926" style="zoom: 33%;" />
 
 Now, we're going to find the optimal solution from the bottom up:
 
