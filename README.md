@@ -823,27 +823,27 @@ The recursive tree:
 
 The recursive equation can be obtained as follows:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/31.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/31.png)" alt="img" style="zoom: 33%;" />
 
 Now, we're going to find the optimal solution from the bottom up:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/32.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/32.png)" alt="img" style="zoom: 33%;" />
 
 The bottom level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/33.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/33.png)" alt="img" style="zoom: 33%;" />
 
 The second last level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/34.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/34.png)" alt="img" style="zoom: 33%;" />
 
 The thrid last level will be:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/35.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/35.png)" alt="img" style="zoom: 33%;" />
 
 Finally, we reach to the top level and got the optimal path:
 
-<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/36.png)" style="zoom: 33%;" />
+<img src="(https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/36.png)" alt="img" style="zoom: 33%;" />
 
 
 ## Pseudocode
