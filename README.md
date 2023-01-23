@@ -688,6 +688,8 @@ The output is correct as well, and it indeed follow the shortest path.
 
 ## **5.8. Comparison**
 
+We tested the same example input by using the indexes only instead of using the ture names of the stations for the initial testing purpose.
+
 ### *1. Dijikstra:*
 
 Implementation:
@@ -704,7 +706,10 @@ Graph graph = mapCreating(9);
 Result:
 
 ```
-FSKTM -> Mutiara -> Univ 360 -> Sky Villa -> KTM
+1 1
+2 1
+3 2
+4 1
 
 Process finished with exit code 0
 ```
@@ -868,7 +873,7 @@ In the dynamic algorithm for TSP, the number of possible subsets can be at most 
 
 <img src="https://github.com/Krys1215/Course-Design-And-Analysis-Of-Algorithms-Project-Draft-Images/blob/main/40.png" alt="image-20230118162517835" style="zoom:50%;" />
 
-# ***7. Reference***
+# ***8. Reference***
 
 [1] Papadimitriou, C.H.; Steiglitz, K. (1998), Combinatorial optimization: algorithms and complexity, Mineola, NY: Dover, pp.308-309.
 
